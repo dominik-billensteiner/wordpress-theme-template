@@ -3,9 +3,7 @@
 // Call theme setup functions
 add_action('wp_enqueue_scripts', 'mytheme_setup'); // Enqueue stylesheet and script files
 add_action('after_setup_theme','mytheme_add_support'); // Configurate theme support
-
-// Remove admin header
-add_action('get_header', 'remove_admin_login_header'); 
+add_action('get_header', 'mytheme_remove_admin_bar'); // Remove admin bar from the header
 
 // Add custom post taxonomy for Werke
 add_action('init', 'db_register_custom_taxonomy_werke'); 
@@ -56,9 +54,10 @@ function mytheme_add_support() {
 }
 
 /**
- * Remove admin header, otherwise (when logged in), there is a margin-top of 32px on the top html element
+ * Remove admin bar from the header when logged in.
+ * Admin bar adds a top-margin of 32px to the top html element.
  */
-function remove_admin_login_header() {
+function mytheme_remove_admin_bar() {
     remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
