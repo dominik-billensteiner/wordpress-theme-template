@@ -1,10 +1,8 @@
 <?php
 
-// Call functions for theme setup
-add_action('wp_enqueue_scripts', 'mytheme_setup'); 
-
-// Configurate theme support
-add_action('after_setup_theme','db_init'); 
+// Call theme setup functions
+add_action('wp_enqueue_scripts', 'mytheme_setup'); // Enqueue stylesheet and script files
+add_action('after_setup_theme','mytheme_add_support'); // Configurate theme support
 
 // Remove admin header
 add_action('get_header', 'remove_admin_login_header'); 
@@ -40,19 +38,16 @@ function mytheme_setup() {
 }
 
 /**
- * Theme support.
+ * Registers theme support for given features.
  */ 
-function db_init() {
-    add_theme_support('post-thumbnails');
-    add_theme_support('title-tag');
-    add_theme_support('html5',
+function mytheme_add_support() {
+    // Basic features only
+    add_theme_support('post-thumbnails'); // Adds thumbnails (featured image) to all post types
+    add_theme_support('title-tag'); // This feature enables plugins and themes to manage the document title tag
+    add_theme_support('html5', // This feature allows the use of HTML5 markup for the search forms, comment forms, comment lists, gallery, and caption.
         array('gallery')
-        //array('comment_list', 'comment-form', 'search-form', 'gallery')
+        //,array('comment_list', 'comment-form', 'search-form', 'gallery')
     );
-}
-
-function debug_output($msg, $var) {
-    echo "<br>" . $msg . ": " . $var . "<br>";
 }
 
 /**
@@ -528,6 +523,10 @@ function db_register_custom_taxonomy_ausstellungen() {
         'query_var' => true,
         'rewrite' => array( 'slug' => 'ausstellungen/projekte', 'with_front' => false),
     ));
+}
+
+function debug_output($msg, $var) {
+    echo "<br>" . $msg . ": " . $var . "<br>";
 }
 ?>
 
