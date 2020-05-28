@@ -22,19 +22,24 @@ add_action('init', 'db_register_custom_post_types');
  * Enqueue stylesheet and script files.
  */
 function mytheme_setup() {
+    
     // Enqueue Wordpress dashicons [https://developer.wordpress.org/resource/dashicons/]
     wp_enqueue_style('dashicons'); 
+
     // Enqueue Main CSS stylesheet "style.css" from theme top folder 
     wp_enqueue_style('style', get_stylesheet_uri(), 1.0, NULL);
+
     // Enqueue main JavaScript file from js-folder
     wp_enqueue_script('main', get_theme_file_uri('/js/main.js'), array( 'jquery' ), 1.0, false);
 
     /* Enqueue stylesheets from external websites
-    wp_enqueue_style('mytheme_font', '//fonts.googleapis.com/css?family=Roboto'); */
+    ** wp_enqueue_style('mytheme_font', '//fonts.googleapis.com/css?family=Roboto'); 
+    */
 
     /* Enqueue examples for diverse assets without version number or jquery
-    wp_enqueue_style('wpg-slideshow', get_theme_file_uri('/assets/wpg-slideshow/style.css'), NULL, NULL); 
-    wp_enqueue_script('polyfill', get_theme_file_uri('/assets/polyfill/polyfill.js'), NULL, NULL, false); */
+    ** wp_enqueue_style('wpg-slideshow', get_theme_file_uri('/assets/wpg-slideshow/style.css'), NULL, NULL);
+    ** wp_enqueue_script('polyfill', get_theme_file_uri('/assets/polyfill/polyfill.js'), NULL, NULL, false); 
+    */
 }
 
 /**
