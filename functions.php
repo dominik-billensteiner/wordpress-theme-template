@@ -105,20 +105,21 @@ function get_term_id_by_taxonomy_name($taxonomy_name, $term_name) {
 }
 
 /**
- * Gets all posts of a post type in specific order.
+ * Gets specific no. of published posts from a post type in specific order.
  * 
- * @param {string} - Post type.
- * @param {string} - Order e.g. 'DESC', 'ASC'.
+ * @param {string} post_type - Post type.
+ * @param {string} order - Order e.g. 'DESC', 'ASC'.
+ * @param {number} posts_per_page - No. of posts, -1 for all
  * @return {object} - Posts.
  */
-function get_posts_by_post_type($post_type, $order) {
+function get_posts_by_post_type($post_type, $order, $posts_per_page) {
     $args = array (
         'post_type'         => $post_type,                 
         'post_status'       => 'publish',
         'order'             => $order,
-        'posts_per_page'    => -1,                  // show all
+        'posts_per_page'    => $posts_per_page,              
     );
-    $the_query = new WP_Query ( $args );    // Execute database query
+    $the_query = new WP_Query ( $args );
     return $the_query;
 }
 
