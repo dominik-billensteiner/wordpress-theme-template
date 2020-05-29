@@ -9,7 +9,7 @@
 // Call theme setup functions
 add_action('wp_enqueue_scripts', 'db_load_scripts'); // Enqueue stylesheet and script files
 add_action('after_setup_theme','db_setup'); // Configurate theme support
-add_action('get_header', 'mytheme_remove_admin_bar'); // Remove admin bar from the header
+add_action('get_header', 'db_remove_admin_bar'); // Remove admin bar from the header
 
 // Add custom post taxonomy for Werke
 add_action('init', 'db_register_custom_taxonomy_werke'); 
@@ -66,7 +66,7 @@ endif;
  * Remove admin bar from the header when logged in.
  * Admin bar adds a top-margin of 32px to the top html element.
  */
-function mytheme_remove_admin_bar() {
+function db_remove_admin_bar() {
     remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
@@ -78,14 +78,16 @@ function mytheme_remove_admin_bar() {
  *
  */
 function get_taxonomy_name_by_term_id($term_id) {
-        // Check for value
-        if ( $term_id != 0 || $term_id != null ) { 
-            $term = get_term( $term_id );
-            if ($term != false) {
-                $taxonomy = $term->taxonomy;
-            }
-            return $taxonomy;
-        } else return;
+    // Check for value
+    if ( $term_id !== 0 || $term_id !== null ) { 
+        // Get term from database
+        $term = get_term( $term_id );
+        if ($term != false) {
+            // Get taxonomy
+            $taxonomy = $term->taxonomy;
+        }
+        return $taxonomy;
+    } else return;
 }
 
 /**
