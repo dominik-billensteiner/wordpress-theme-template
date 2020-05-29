@@ -1,14 +1,14 @@
 <?php
 /**
- * MyTheme's functions and definitions
- * @author Name
- * @package MyTheme
- * @since MyTheme 1.0
+ * Dominik template theme functions and definitions
+ * @author Dominik Billensteiner
+ * @package db-theme
+ * @since db-theme 1.0
  */
  
 // Call theme setup functions
-add_action('wp_enqueue_scripts', 'mytheme_load_scripts'); // Enqueue stylesheet and script files
-add_action('after_setup_theme','mytheme_setup'); // Configurate theme support
+add_action('wp_enqueue_scripts', 'db_load_scripts'); // Enqueue stylesheet and script files
+add_action('after_setup_theme','db_setup'); // Configurate theme support
 add_action('get_header', 'mytheme_remove_admin_bar'); // Remove admin bar from the header
 
 // Add custom post taxonomy for Werke
@@ -21,12 +21,11 @@ add_action('init', 'db_register_custom_taxonomy_ausstellungen');
 // CPTs must be added after custom taxonomy, otherwise they don't work and pages throw 404 error
 add_action('init', 'db_register_custom_post_types'); 
 
-if ( ! function_exists( 'mytheme_setup' ) ) :
 
 /**
  * Enqueue stylesheet and script files.
  */
-function mytheme_load_scripts() {
+function db_load_scripts() {
     
     // Enqueue Wordpress dashicons [https://developer.wordpress.org/resource/dashicons/]
     wp_enqueue_style('dashicons'); 
@@ -47,10 +46,12 @@ function mytheme_load_scripts() {
     */
 }
 
+if ( ! function_exists( 'db_setup' ) ) :
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
- */ 
-function mytheme_setup() {
+ */ ´
+function db_setup() {
     // Basic features only
     add_theme_support('post-thumbnails'); // Adds thumbnails (featured image) to all post types
     add_theme_support('title-tag'); // This feature enables plugins and themes to manage the document title tag
@@ -59,6 +60,7 @@ function mytheme_setup() {
         //,array('comment_list', 'comment-form', 'search-form', 'gallery')
     );
 }
+endif;
 
 /**
  * Remove admin bar from the header when logged in.
