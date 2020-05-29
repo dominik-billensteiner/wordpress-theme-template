@@ -73,7 +73,7 @@ function db_remove_admin_bar() {
 /**
  * Get taxonomy name by term id.
  *
- * @param {int} - Term id.
+ * @param {int} term_id - Term id.
  * @return {string} - Taxonomy name.
  *
  */
@@ -93,12 +93,13 @@ function get_taxonomy_name_by_term_id($term_id) {
 /**
  * Get taxonomy name by term id.
  *
- * @param {string} - Taxonomy name.
- * @param {string} - Term Name.
+ * @param {string} taxonomy_name - Taxonomy name.
+ * @param {string} term_name - Term Name.
  * @return {int} - Term id.
  *
  */
 function get_term_id_by_taxonomy_name($taxonomy_name, $term_name) {
+    // Get term from database and return id
     $term = get_term_by( "name", $term_name, $taxonomy_name );
     return $term->id;
 }
